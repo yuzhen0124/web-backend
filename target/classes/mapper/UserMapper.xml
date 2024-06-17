@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab2.UserMapper">
+
+    <select id="findUserById" parameterType="int"
+            resultType="com.lab2.mybatis.po.User">
+        select * from User where userID = #{userID}
+    </select>
+
+    <select id="findUserByUsername" parameterType="java.lang.String"
+            resultType="com.lab2.mybatis.po.User">
+        select * from User where username = #{username}
+    </select>
+
+    <select id="findUserByPhone" parameterType="java.lang.String"
+            resultType="com.lab2.mybatis.po.User">
+        select * from User where phone = #{phone}
+    </select>
+
+    <select id="findUserByUsernameAndPassword" parameterType="com.lab2.mybatis.po.User"
+            resultType="com.lab2.mybatis.po.User">
+        select * from User where username = #{username} and password = #{password}
+    </select>
+
+    <insert id="addUser" parameterType="com.lab2.mybatis.po.User"
+            useGeneratedKeys="true" keyProperty="userID">
+        insert into User (username, password, email, phone, image)
+        values (#{username}, #{password}, #{email}, #{phone}, #{image})
+    </insert>
+
+    <update id="updateUser" parameterType="com.lab2.mybatis.po.User">
+        update User set
+            username = #{username}, password = #{password}, email = #{email}, phone = #{phone}, image = #{image}
+        where userID = #{userID}
+    </update>
+
+</mapper>

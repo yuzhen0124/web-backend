@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab2.ExamMapper">
+
+    <select id="findExamById" parameterType="int"
+            resultType="com.lab2.mybatis.po.Exam">
+        select * from Exam where examID = #{examID}
+    </select>
+
+    <select id="findAllExams" resultType="com.lab2.mybatis.po.Exam">
+        select * from Exam
+    </select>
+
+    <insert id="addExam" parameterType="com.lab2.mybatis.po.Exam"
+            useGeneratedKeys="true" keyProperty="examID">
+        insert into Exam (questions, answers)
+        values (#{questions}, #{answers})
+    </insert>
+
+    <update id="updateExam" parameterType="com.lab2.mybatis.po.Exam">
+        update Exam set options = #{options}, score = #{score} where examID = #{examID}
+    </update>
+
+
+</mapper>

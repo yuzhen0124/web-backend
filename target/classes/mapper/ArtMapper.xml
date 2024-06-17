@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab2.ArtMapper">
+
+    <select id="findArtById" parameterType="int"
+            resultType="com.lab2.mybatis.po.Art">
+        select * from Art where artID = #{artID}
+    </select>
+
+    <select id="findAllArts" resultType="com.lab2.mybatis.po.Art">
+        SELECT * FROM Art
+    </select>
+
+    <insert id="addArt" parameterType="com.lab2.mybatis.po.Art"
+            useGeneratedKeys="true" keyProperty="artID">
+        insert into Art (artName, description)
+        values (#{artName}, #{description})
+    </insert>
+
+    <update id="updateArt" parameterType="com.lab2.mybatis.po.Art">
+        update Art set artName = #{artName}, description = #{description} where artID = #{artID}
+    </update>
+
+    <delete id="deleteArt" parameterType="int">
+        delete * from Art where artID=#{artID}
+    </delete>
+
+</mapper>

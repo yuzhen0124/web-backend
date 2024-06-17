@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lab2.QuestionMapper">
+
+    <select id="findQuestionById" parameterType="int"
+            resultType="com.lab2.mybatis.po.Question">
+        select * from Question where questionID = #{questionID}
+    </select>
+
+    <select id="findAllQuestions" resultType="com.lab2.mybatis.po.Question">
+        SELECT * FROM Question
+    </select>
+
+    <insert id="addQuestion" parameterType="com.lab2.mybatis.po.Question"
+            useGeneratedKeys="true" keyProperty="questionID">
+        insert into Question (text, option1, option2, option3, answer)
+        values (#{text}, #{option1}, #{option2}, #{option3}, #{answer})
+    </insert>
+
+    <update id="updateQuestion" parameterType="com.lab2.mybatis.po.Question">
+        update Question set text = #{text}, option1 = #{option1}, option2 = #{option2}, option3 = #{option3},
+                            answer = #{answer} where questionID = #{questionID}
+    </update>
+
+    <delete id="deleteQuestion" parameterType="int">
+        delete * from Question where questionID=#{questionID}
+    </delete>
+
+</mapper>
