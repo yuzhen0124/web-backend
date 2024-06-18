@@ -35,5 +35,11 @@ public class QuestionService {
         return "Update Question Successfully!";
     }
 
+    public String deleteQuestion( int id ) throws Exception {
+        try (SqlSession sqlSession = SqlSessionLoader.getSqlSession()) {
+            sqlSession.delete("com.lab2.QuestionMapper.deleteQuestion", id);
+        }
+        return "Delete Question Successfully!";
+    }
 
 }

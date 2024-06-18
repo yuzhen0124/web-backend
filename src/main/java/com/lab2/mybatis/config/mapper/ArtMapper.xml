@@ -24,7 +24,7 @@
     </update>
 
     <delete id="deleteArt" parameterType="int">
-        delete * from Art where artID=#{artID}
+        delete from Art where artID=#{artID}
     </delete>
 
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -28,41 +29,41 @@ public class ExamController {
         try {
             int Num = 2;
             List<Question> questionList = questionService.findAllQuestions();
-            List<Integer> questionsIDList = new ArrayList<>();
-            for (Question question : questionList) {
-                questionsIDList.add(question.getQuestionID());
-            }
+            List<Question> selectedQuestions = randomSelect(questionList, Num);
 
-            List<Integer> selectedIDs = new ArrayList<>();
-            Random random = new Random();
-            while (selectedIDs.size() < Num) {
-                int randomIndex = random.nextInt(questionsIDList.size());
-                int questionID = questionsIDList.get(randomIndex);
-                if (!selectedIDs.contains(questionID)) {
-                    selectedIDs.add(questionID);
-                }
+            List<Integer> questionIDs = new ArrayList<>();
+            for (Question question : selectedQuestions) {
+                int questionID = question.getQuestionID();
+                questionIDs.add(questionID);
             }
-            StringBuilder selectQuestions = new StringBuilder();
-            for (Integer i : selectedIDs) {
-                selectQuestions.append(i).append("-");
-            }
-            String selectQuestionsString = selectQuestions.toString();
+            String selectQuestionsString = ListToString(questionIDs);
 
             List<Integer> answers = new ArrayList<>();
-            for (Question question : questionList) {
+            for (Question question : selectedQuestions) {
                 int answer = question.getAnswer();
                 answers.add(answer);
             }
-            StringBuilder answersArray = new StringBuilder();
-            for (Integer i : answers) {
-                answersArray.append(i).append("-");
-            }
-            String answersArrayString = answersArray.toString();
+            String answersArrayString = ListToString(answers);
 
             Exam exam = new Exam(selectQuestionsString, answersArrayString);
 
             int examID = examService.addExam(exam);
             return "Add Exam Successfully! Exam ID: " + examID;
+        } catch (Exception e) {
+            return "An error occurred: " + e.getMessage();
+        }
+    }
+
+    @GetMapping("/{examID}")
+    public String getExam(@PathVariable int examID) {
+        try {
+            Exam exam = examService.getExam(examID);
+            if(exam != null) {
+                Gson gson = new Gson();
+                return gson.toJson(exam);
+            } else {
+                return "Exam Not found";
+            }
         } catch (Exception e) {
             return "An error occurred: " + e.getMessage();
         }
@@ -116,6 +117,35 @@ public class ExamController {
         return list;
     }
 
+    private String ListToString(List<Integer> list) {
+        StringBuilder sb = new StringBuilder();
+        for (Integer i : list) {
+            sb.append(i).append("-");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
+
+    private static List<Question> randomSelect(List<Question> questionList, int Num) {
+        if (Num >= questionList.size()) {
+            // 如果要选择的数量大于等于题目列表的大小，直接返回题目列表
+            return questionList;
+        }
+
+        // 创建一个用于存放随机选择的题目的列表
+        List<Question> selectedQuestions = new ArrayList<>();
+
+        // 将题目列表进行随机排序
+        List<Question> shuffledList = new ArrayList<>(questionList);
+        Collections.shuffle(shuffledList);
+
+        // 从随机排序后的列表中取前 num 个题目作为选择结果
+        for (int i = 0; i < Num; i++) {
+            selectedQuestions.add(shuffledList.get(i));
+        }
+
+        return selectedQuestions;
+    }
 
 
 }

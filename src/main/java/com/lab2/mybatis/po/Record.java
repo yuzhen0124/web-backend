@@ -2,15 +2,44 @@ package com.lab2.mybatis.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 public class Record {
     private int recordID;
-    private int examID;
     private int userID;
-    private int score;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private int examID;
     private Date joinDate;
+
+    private int score;
+
+
+    public Record(int recordID, int userID, int examID, Date joinDate, int score) {
+        this.recordID = recordID;
+        this.userID = userID;
+        this.examID = examID;
+        this.joinDate = joinDate;
+        this.score = score;
+    }
+
+    public Record(int recordID, int userID, int examID, LocalDateTime joinDate, int score) {
+        this.recordID = recordID;
+        this.userID = userID;
+        this.examID = examID;
+        this.joinDate = Date.from(joinDate.atZone(ZoneId.of("GMT+8")).toInstant());
+        this.score = score;
+    }
+
+    public Record(int userID, int examID, Date joinDate, int score) {
+        this.examID = examID;
+        this.userID = userID;
+        this.score = score;
+        this.joinDate = joinDate;
+    }
 
     public int getRecordID() {
         return recordID;
@@ -43,4 +72,5 @@ public class Record {
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
+
 }

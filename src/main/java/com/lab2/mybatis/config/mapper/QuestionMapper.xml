@@ -25,7 +25,7 @@
     </update>
 
     <delete id="deleteQuestion" parameterType="int">
-        delete * from Question where questionID=#{questionID}
+        delete from Question where questionID=#{questionID}
     </delete>
 
 </mapper>

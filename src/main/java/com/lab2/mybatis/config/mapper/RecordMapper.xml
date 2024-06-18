@@ -21,6 +21,6 @@
     </insert>
 
     <delete id="deleteRecord" parameterType="int">
-        delete * from Record where recordID=#{recordID}
+        delete from Record where recordID=#{recordID}
     </delete>
 </mapper>
