@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.RecordMapper">
+
+    <select id="findRecordById" parameterType="int"
+            resultType="com.example.demo.mybatis.po.Record">
+        select * from Record where recordID = #{recordID}
+    </select>
+
+    <select id="findRecordByUserID" parameterType="int"
+            resultType="com.example.demo.mybatis.po.Record">
+        select * from Record where userID = #{userID}
+    </select>
+
+    <insert id="addRecord" parameterType="com.example.demo.mybatis.po.Record"
+            useGeneratedKeys="true" keyProperty="recordID">
+        insert into Record (userID, examID, joinDate, score)
+        values (#{userID}, #{examID}, #{joinDate}, #{score})
+    </insert>
+
+    <delete id="deleteRecord" parameterType="int">
+        delete from Record where recordID=#{recordID}
+    </delete>
+</mapper>
