@@ -3,7 +3,7 @@ name: Build, Package, and Push Docker Image
 on:
   push:
     branches:
-      - master  # 触发条件可以根据你的需求调整
+      - main  # 触发条件可以根据你的需求调整
 
 jobs:
   build-package-push:
