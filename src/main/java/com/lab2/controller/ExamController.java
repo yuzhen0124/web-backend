@@ -27,7 +27,7 @@ public class ExamController {
     @GetMapping ("/add")
     public String addExam() {
         try {
-            int Num = 2;
+            int Num = 5;
             List<Question> questionList = questionService.findAllQuestions();
             List<Question> selectedQuestions = randomSelect(questionList, Num);
 
@@ -100,8 +100,7 @@ public class ExamController {
             exam.setOptions(options);
 
             int score = examService.calculateScore(request.getExamID(), options);
-            //exam.setScore(score);
-            //examService.updateExam(exam);
+
             return "Exam Submitted Successfully!Score: " + score;
         } catch (Exception e) {
             return "An error occurred: " + e.getMessage();
