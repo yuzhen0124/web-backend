@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/demo-0.0.1-SNAPSHOT.jar /app/demo-0.0.1-SNAPSHOT.jar
 
 # 暴露应用需要监听的端口
-EXPOSE 8080
+EXPOSE 8000
 
 # 定义容器启动时运行的命令
 CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
