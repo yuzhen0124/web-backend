@@ -11,4 +11,4 @@ COPY target/Lab2-1.0-SNAPSHOT.jar /app/Lab2-1.0-SNAPSHOT.jar
 EXPOSE 8080
 
 # 定义容器启动时运行的命令
-CMD ["java", "-jar", "my-java-app.jar"]
+CMD ["java", "-jar", "Lab2-1.0-SNAPSHOT.jar"]
