@@ -1,8 +1,9 @@
+DROP TABLE IF EXISTS Record;
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Art;
 DROP TABLE IF EXISTS Question;
 DROP TABLE IF EXISTS Exam;
-DROP TABLE IF EXISTS Record;
+
 
 CREATE TABLE IF NOT EXISTS User (
                                     userID INT(11) NOT NULL AUTO_INCREMENT,
@@ -25,13 +26,6 @@ CREATE TABLE IF NOT EXISTS Art (
                                     PRIMARY KEY (artID)
 );
 
-INSERT INTO Art (artID, artName, description) VALUES (1, '铜马', '铜马体态矫健，四肢修长，肌肉线条流畅而富有张力，仿佛随时准备奔驰于辽阔的天地之间。马首微昂，双眼炯炯有神，透露出一种不可一世的威严与力量。马鬃与马尾飘逸，更增添了几分灵动与飘逸。
-
-作为出土文物，这匹铜马见证了东周时期的文化繁荣与技艺高峰。这匹铜马不仅展现了古代工匠精湛的铸造技艺，更是天马神韵的生动再现。');
-
-INSERT INTO Art (artID, artName, description) VALUES (2, '觥', '觥是古代盛酒器，一般作椭圆或长方形体，或仿动物形体。这种铜器有兽头形盖，器型似，前部有宽口流，后部常有鋬，器底置圈足、三足或多足，以圈足为多见');
-
-
 CREATE TABLE IF NOT EXISTS Question (
                                     questionID INT(11) NOT NULL AUTO_INCREMENT,
                                     text VARCHAR(100) NOT NULL,     /*题目内容*/
@@ -42,11 +36,19 @@ CREATE TABLE IF NOT EXISTS Question (
                                     CHECK (answer IN (1, 2, 3)),   /*约束*/
                                     PRIMARY KEY (questionID)
 );
+
 /* 题目参考链接：https://www.ihzw.com.cn/JiaoYuXinWen/35589_2.html*/
 INSERT INTO Question (questionID, text, option1, option2, option3, answer) VALUES (1, '万年的稻作文化系统位于（）省。', 'A.江西', 'B.云南', 'C.浙江', 1);
 INSERT INTO Question (questionID, text, option1, option2, option3, answer) VALUES (2, '高句丽古墓群属于哪个国家的世界文化遗产', 'A.韩国', 'B.朝鲜', 'C.中国', 2);
 INSERT INTO Question (questionID, text, option1, option2, option3, answer) VALUES (3, '耳杯这种形制的玛瑙器出现于什么时代', 'A.汉代', 'B.三国', 'C.魏晋', 1);
 INSERT INTO Question (questionID, text, option1, option2, option3, answer) VALUES (4, '号称“青铜之冠”，体现中国古代铜器制造最高制造水平的是', 'A.铜车马', 'B.青铜剑', 'C.寺工铜矛', 1);
+INSERT INTO Question (questionID, text, option1, option2, option3, answer) VALUES (5, '承德避暑山庄，又称（），历经（）三代，是夏天避暑和处理政务的地方', 'A.“热河行宫”;康熙、雍正、乾隆', 'B.“盛京夏宫”;康熙、乾隆、同治', 'C.“承德行宫”;雍正、乾隆、同治', 1);
+INSERT INTO Question (questionID, text, option1, option2, option3, answer) VALUES (6, '著名的卢沟桥始建于（）', 'A.隋朝', 'B.元朝', 'C.金朝', 3);
+INSERT INTO Question (questionID, text, option1, option2, option3, answer) VALUES (7, '在长城上白天遇敌情举烟，称为（）', 'A.烽', 'B.燧', 'C.炬', 2);
+INSERT INTO Question (questionID, text, option1, option2, option3, answer) VALUES (8, '玄奘墓塔位于（）', 'A.《伤寒论》', 'B.《黄帝内经》', 'C.《本草纲目》', 2);
+INSERT INTO Question (questionID, text, option1, option2, option3, answer) VALUES (9, '我国最早的一部医书是（）', 'A.四川省', 'B.山东省', 'C.陕西省', 3);
+INSERT INTO Question (questionID, text, option1, option2, option3, answer) VALUES (10, '世界上最早、最大的百科全书是中国的（）', 'A.《四库全书》', 'B.《古今图书集成》', 'C.《永乐大典》', 3);
+
 
 CREATE TABLE IF NOT EXISTS Exam (
                                     examID INT(11) NOT NULL AUTO_INCREMENT,
